@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.log
 
 # Virtual Environment
 venv/
@@ -29,25 +30,155 @@ env/
 .vscode/
 *.swp
 *.swo
+*.swn
+*~
+.DS_Store
 
 # Environment variables
 .env
 
 # Logs
 *.log
+consolidacao.log
 
 # Backups
 *.bak
 *.tmp
+*.backup
+*~
 
 # Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+*.lnk
 
 # Directories
 planilhas_originais/
+backups/
+planilha_mestre/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+*.env
+
+# Arquivos de configuração local
+*.local
+
+# Arquivos de IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Arquivos do Windows
+desktop.ini
+
+# Arquivos de log
+logs/
+*.log
+
+# Arquivos de banco de dados
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de cache
+.cache/
+
+# Arquivos de sistema
+*.sys
+*.dll
+*.exe
+*.o
+*.obj
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.a
+*.lib
+*.out
+*.app
+*.dmg
+*.pkg
+*.msi
+*.msm
+*.msp
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.vs/
+.vs/
+*.sln.ide/
+*.suo
+*.nupkg
+*.ncrunchsolution
+*.ncrunchproject
+*.dotCover
+*.dotcover
+*.resharper
+*.sln.docstates.ide/
+*.vspscc
+*.vssscc
+*.vssscc
+*.vspscc
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
+*.vspscc
+*.vssscc
+*.vspscc
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.vs/
+.vs/
+*.sln.ide/
+*.suo
+*.nupkg
+*.ncrunchsolution
+*.ncrunchproject
+*.dotCover
+*.dotcover
+*.resharper
+*.sln.docstates.ide/
+*.vspscc
+*.vssscc
+*.vssscc
+*.vspscc
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
+*.vspscc
+*.vssscc
+*.vspscc
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
 backups/
 planilha_mestre/
 
