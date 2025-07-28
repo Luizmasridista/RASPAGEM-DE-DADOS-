@@ -205,13 +205,7 @@ class FormattingExtractor:
         """Cria uma cópia segura do objeto Font"""
         try:
             if font:
-                return Font(
-                    name=getattr(font, 'name', None),
-                    size=getattr(font, 'size', None),
-                    bold=getattr(font, 'bold', None),
-                    italic=getattr(font, 'italic', None),
-                    color=getattr(font, 'color', None)
-                )
+                return copy.copy(font)
         except Exception as e:
             print(f"Erro ao copiar fonte: {e}")
         return None
@@ -499,31 +493,80 @@ class FormattingService:
         self.validator = FormattingValidator()
     
     def process_formatting(self, master_file: str, subordinate_files: List[str], strategy: str = 'MERGE') -> bool:
-        print(f"[FormattingService] Processando {len(subordinate_files)} arquivos subordinados")
+        """
+        Processa e aplica a formatação das planilhas subordinadas na mestre.
+        """
+        print(f"[FormattingService] Iniciando processamento de formatação para {len(subordinate_files)} arquivos.")
         if not os.path.exists(master_file):
-            print(f"[FormattingService] Arquivo mestre não encontrado: {master_file}")
+            print(f"[FormattingService] ERRO: Arquivo mestre não encontrado em '{master_file}'")
             return False
-        
+
         try:
+            # Carregar a planilha mestre
             wb_master = openpyxl.load_workbook(master_file)
-            for idx, sub_file in enumerate(subordinate_files, 1):
-                if not os.path.exists(sub_file):
-                    print(f"[FormattingService] Arquivo subordinado {idx} não encontrado: {sub_file}")
-                    continue
-                wb_sub = openpyxl.load_workbook(sub_file)
-                print(f"[FormattingService] Processando formatação do arquivo {idx}/{len(subordinate_files)}: {sub_file}")
-                # Exemplo simplificado: Copiar formatação da primeira célula
-                ws_master = wb_master.active
-                ws_sub = wb_sub.active
-                if ws_sub['A1'].font:
-                    ws_master['A1'].font = ws_sub['A1'].font
-                    print(f"[FormattingService] Formatação aplicada de {sub_file}")
+            ws_master = wb_master.active
+
+            # Extrair a formatação de todas as planilhas subordinadas
+            subordinate_formats = []
+            for sub_file in subordinate_files:
+                if os.path.exists(sub_file):
+                    print(f"[FormattingService] Extraindo formatação de: {os.path.basename(sub_file)}")
+                    sub_format = self.extractor.extract_from_file(sub_file)
+                    subordinate_formats.append(sub_format)
+                else:
+                    print(f"[FormattingService] AVISO: Arquivo subordinado não encontrado: {sub_file}")
+
+            if not subordinate_formats:
+                print("[FormattingService] Nenhuma formatação de arquivo subordinado para aplicar.")
+                return True
+
+            # Lógica de mesclagem de formatação
+            # Usar a formatação da primeira planilha subordinada como base para simplicidade
+            # Em um cenário real, uma estratégia de mesclagem mais complexa seria necessária
+            base_format = subordinate_formats[0]
+
+            # Aplicar formatação de colunas
+            print("[FormattingService] Aplicando formatação de colunas...")
+            for col_letter, col_format in base_format.column_formats.items():
+                dim = ws_master.column_dimensions[col_letter]
+                if col_format.width:
+                    dim.width = col_format.width
+                if col_format.hidden:
+                    dim.hidden = col_format.hidden
+
+            # Aplicar formatação de células (cabeçalho)
+            # Focar na primeira linha para evitar problemas de performance
+            print("[FormattingService] Aplicando formatação de cabeçalho...")
+            for row_idx in range(1, 2): # Apenas a primeira linha (cabeçalho)
+                for col_idx in range(1, ws_master.max_column + 1):
+                    cell_addr = f"{openpyxl.utils.get_column_letter(col_idx)}{row_idx}"
+                    if cell_addr in base_format.cell_formats:
+                        cell_format = base_format.cell_formats[cell_addr]
+                        self._copy_cell_style(ws_master[cell_addr], cell_format)
+
+            # Salvar as alterações
             wb_master.save(master_file)
-            print(f"[FormattingService] Formatação concluída e salva em {master_file}")
+            print(f"[FormattingService] Formatação aplicada e salva com sucesso em {master_file}")
             return True
+
         except Exception as e:
-            print(f"[FormattingService] Erro ao processar formatação: {str(e)}")
+            print(f"[FormattingService] ERRO CRÍTICO ao processar formatação: {e}")
+            import traceback
+            traceback.print_exc()
             return False
+
+    def _copy_cell_style(self, target_cell, cell_format: CellFormatting):
+        """Copia o estilo de uma formatação de célula para uma célula de destino."""
+        if cell_format.font:
+            target_cell.font = copy.copy(cell_format.font)
+        if cell_format.fill:
+            target_cell.fill = copy.copy(cell_format.fill)
+        if cell_format.border:
+            target_cell.border = copy.copy(cell_format.border)
+        if cell_format.alignment:
+            target_cell.alignment = copy.copy(cell_format.alignment)
+        if cell_format.number_format:
+            target_cell.number_format = cell_format.number_format
     
     def extract_formatting_summary(self, file_path: str) -> Dict[str, Any]:
         """

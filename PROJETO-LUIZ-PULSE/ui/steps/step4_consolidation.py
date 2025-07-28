@@ -408,7 +408,9 @@ class Step4Consolidation:
             )
             
             # Adiciona o botão ao layout
-            self.container.content.controls.append(next_container)
+            # Acessa a coluna principal dentro do container de progresso
+            main_column = self.progress_container.content
+            main_column.controls.append(next_container)
         
         # Atualiza a UI
         try:
@@ -418,11 +420,6 @@ class Step4Consolidation:
             print(f"[Step4] Erro ao atualizar UI após finalização: {e}")
             import traceback
             traceback.print_exc()
-    
-    # Este método foi movido para cima no arquivo e está duplicado aqui.
-    # A implementação correta está na linha ~136
-    
-    # Método update removido para evitar duplicação - usamos self.page.update() diretamente
     
     def _handle_next(self, e):
         """Lida com o clique no botão próximo"""
@@ -439,30 +436,33 @@ class Step4Consolidation:
         # Reseta botão de início
         if self.start_button:
             self.start_button.visible = True
+            self.start_button.disabled = False
+
+        if self.progress_container:
+            self.progress_container.visible = False
         
         if self.overall_progress:
             self.overall_progress.value = 0
-            self.overall_progress.visible = False
         
         if self.status_text:
             self.status_text.value = "Aguardando início da consolidação..."
             self.status_text.color = ds.colors.NEUTRAL_600
-            self.status_text.visible = False
-        
-        if self.progress_container:
-            self.progress_container.visible = False
         
         # Reseta progresso dos passos
         for step_id in self.step_progress_bars:
-            self.step_progress_bars[step_id].value = 0
-            self.step_status_texts[step_id].value = "Aguardando..."
-            self.step_status_texts[step_id].color = ds.colors.NEUTRAL_500
+            progress_bar = self.step_progress_bars[step_id]
+            status_text = self.step_status_texts[step_id]
+
+            progress_bar.value = 0
+            status_text.value = "Aguardando..."
+            status_text.color = ds.colors.NEUTRAL_500
             
             # Reseta ícones
-            step_container = self.step_progress_bars[step_id].parent.parent.parent
+            step_container = progress_bar.parent.parent.parent
             if hasattr(step_container, 'status_icon'):
-                step_container.status_icon.name = ft.Icons.PENDING
-                step_container.status_icon.color = ds.colors.NEUTRAL_400
+                icon = step_container.status_icon
+                icon.name = ft.icons.RADIO_BUTTON_UNCHECKED
+                icon.color = ds.colors.NEUTRAL_400
         
         # Atualiza a UI
         try:
