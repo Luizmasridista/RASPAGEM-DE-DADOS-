@@ -1,0 +1,44 @@
+# Core dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Database
+sqlite3  # Built-in with Python
+
+# Scheduling
+schedule>=1.2.0
+
+# Web interface
+streamlit>=1.28.0
+plotly>=5.17.0
+
+# Data handling
+pandas>=2.1.0
+
+# Email notifications
+smtplib  # Built-in with Python
+email-validator>=2.1.0
+
+# Logging and configuration
+pyyaml>=6.0.1
+
+# Testing
+pytest>=7.4.0
+pytest-mock>=3.12.0
+pytest-cov>=4.1.0
+
+# Development tools
+black>=23.9.0
+flake8>=6.1.0
+mypy>=1.6.0
+
+# HTTP client enhancements
+urllib3>=2.0.0
+certifi>=2023.7.22
+
+# Date/time handling
+python-dateutil>=2.8.2
+
+# Type hints
+typing-extensions>=4.8.0

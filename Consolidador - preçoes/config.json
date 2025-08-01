@@ -1,0 +1,12 @@
+{
+  "intervalo_execucao": 3600,
+  "timeout_requisicao": 10,
+  "max_retries": 3,
+  "log_level": "INFO",
+  "email_enabled": false,
+  "smtp_server": "",
+  "smtp_port": 587,
+  "smtp_username": "",
+  "smtp_password": "",
+  "db_path": "precos.db"
+}
