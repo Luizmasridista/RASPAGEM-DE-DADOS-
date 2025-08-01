@@ -1,0 +1,32 @@
+2025-07-31 23:50:03,414 - PriceMonitoringApp - INFO - Logging initialized with level: INFO
+2025-07-31 23:50:03,414 - PriceMonitoringApp - INFO - Initializing application components...
+2025-07-31 23:50:03,414 - components.config_manager - INFO - Successfully loaded system configuration
+2025-07-31 23:50:03,414 - PriceMonitoringApp - INFO - System configuration loaded: SystemConfig(intervalo_execucao=3600, timeout_requisicao=10, max_retries=3, log_level='INFO', email_enabled=False, smtp_server='', smtp_port=587, smtp_username='', smtp_password='', db_path='precos.db')
+2025-07-31 23:50:03,414 - services.database_manager - INFO - Database tables created successfully
+2025-07-31 23:50:03,414 - services.database_manager - INFO - Database manager initialized with path: precos.db
+2025-07-31 23:50:03,414 - services.database_manager - INFO - Database tables created successfully
+2025-07-31 23:50:03,414 - PriceMonitoringApp - INFO - Database manager initialized
+2025-07-31 23:50:03,424 - services.http_client - INFO - HTTPClient initialized with timeout=10s, max_retries=3, rate_limit=1.0s
+2025-07-31 23:50:03,425 - services.html_parser - INFO - HTMLParser initialized with default selectors
+2025-07-31 23:50:03,425 - services.web_scraper - INFO - WebScraper initialized with timeout=10s
+2025-07-31 23:50:03,425 - PriceMonitoringApp - INFO - Web scraper initialized
+2025-07-31 23:50:03,426 - NotificationService - INFO - Notificador 'console' adicionado ao serviço
+2025-07-31 23:50:03,426 - PriceMonitoringApp - INFO - Notification service initialized
+2025-07-31 23:50:03,427 - PerformanceMonitor - INFO - PerformanceMonitor initialized with max_history_size=1000
+2025-07-31 23:50:03,427 - PriceMonitor - INFO - PriceMonitor initialized with max_workers=5
+2025-07-31 23:50:03,427 - PriceMonitoringApp - INFO - Price monitor initialized
+2025-07-31 23:50:03,428 - TaskScheduler - INFO - TaskScheduler initialized
+2025-07-31 23:50:03,429 - PriceMonitoringApp - INFO - Task scheduler initialized
+2025-07-31 23:50:03,430 - PriceMonitoringApp - INFO - All components initialized successfully
+2025-07-31 23:50:03,432 - components.config_manager - INFO - Loading products configuration from produtos.json
+2025-07-31 23:50:03,435 - components.config_manager - INFO - Successfully loaded 1 products
+2025-07-31 23:50:03,441 - PriceMonitoringApp - INFO - Cleaning up application resources...
+2025-07-31 23:50:03,441 - services.http_client - INFO - HTTPClient session closed
+2025-07-31 23:50:03,442 - services.web_scraper - INFO - WebScraper closing - Final metrics: {'total_requests': 0, 'successful_requests': 0, 'failed_requests': 0, 'success_rate': 0.0, 'average_response_time': 0.0}
+2025-07-31 23:50:03,443 - services.database_manager - INFO - Database connections closed
+2025-07-31 23:50:03,444 - PriceMonitor - INFO - PriceMonitor closing - Final metrics: {'enhanced_statistics': {'total_executions': 0, 'total_products_processed': 0, 'overall_success_rate': 0.0, 'average_execution_time': 0.0, 'median_execution_time': 0.0, 'min_execution_time': 0.0, 'max_execution_time': 0.0, 'total_alerts_sent': 0, 'total_alert_rate': 0.0, 'total_errors': 0, 'most_common_errors': [], 'success_rate_trend': 'stable', 'performance_trend': 'stable'}, 'legacy_metrics': {'total_executions': 0, 'successful_executions': 0, 'failed_executions': 0, 'success_rate': 0.0, 'average_execution_time': 0.0, 'scraper_metrics': {'total_requests': 0, 'successful_requests': 0, 'failed_requests': 0, 'success_rate': 0.0, 'average_response_time': 0.0}}}
+2025-07-31 23:50:03,446 - services.database_manager - INFO - Database connections closed
+2025-07-31 23:50:03,448 - services.http_client - INFO - HTTPClient session closed
+2025-07-31 23:50:03,449 - services.web_scraper - INFO - WebScraper closing - Final metrics: {'total_requests': 0, 'successful_requests': 0, 'failed_requests': 0, 'success_rate': 0.0, 'average_response_time': 0.0}
+2025-07-31 23:50:03,449 - PriceMonitoringApp - INFO - Application cleanup completed
+2025-07-31 23:50:03,451 - services.database_manager - INFO - Database connections closed

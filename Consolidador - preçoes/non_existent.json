@@ -1,0 +1,12 @@
+{
+  "produtos": [
+    {
+      "nome": "Exemplo - Smartphone",
+      "url": "https://example.com/smartphone",
+      "preco_alvo": 500.0,
+      "ativo": false,
+      "seletores_personalizados": null,
+      "intervalo_minimo": 3600
+    }
+  ]
+}
